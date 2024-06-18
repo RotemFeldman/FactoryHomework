@@ -1,4 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FactoryHomework
 {
@@ -6,14 +10,17 @@ namespace FactoryHomework
     {
         static void Main(string[] args)
         {
-            AbstractCarFactory factory = new AbstractCarFactory();
+            var chatroom = new Chatroom();
 
-            Client c = new Client(factory);
+            var Rotem = new Chatter(chatroom,"Rotem");
+            var Ilya = new Chatter(chatroom,"Ilya");
+            var Tamir = new Chatter(chatroom, "Tamir");
 
-            var car = c.CreateSkoda();
+            Rotem.Send("everyone can see this");
+            Rotem.Send("only Ilya can see this", Ilya);
+            Tamir.Send("Im angry");
 
-            Console.WriteLine(car.Name + " " + car.ComesWithSpareTire);
-
+            chatroom.Print();
         }
     }
 }
