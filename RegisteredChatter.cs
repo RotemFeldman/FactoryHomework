@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactoryHomework
 {
-    internal class Chatter : ICollegue
+    internal class RegisteredChatter : ICollegue
     {
         public readonly List<Chat> ChatHistory= new List<Chat>();
 
@@ -15,19 +15,19 @@ namespace FactoryHomework
 
         public string Name {  get; }
 
-        public Chatter(IChatroom chatroom, string name)
+        public RegisteredChatter(IChatroom chatroom, string name)
         {
             _chatroom = chatroom;
             _chatroom.AddChatter(this);
             Name = name;
         }
 
-        public void Recieve(Chat chat)
+        public virtual void Recieve(Chat chat)
         {
             ChatHistory.Add(chat);
         }
 
-        public void Send(string msg, ICollegue recipient = null)
+        public virtual void Send(string msg, ICollegue recipient = null)
         {
             _chatroom.Recieve(new Chat(this,msg,recipient));
         }
