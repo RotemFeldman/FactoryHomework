@@ -1,18 +1,34 @@
-﻿using System.Data;
+﻿using States;
+using System.Data;
 
-namespace FactoryHomework
+namespace DesignPatterns
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            AbstractCarFactory factory = new AbstractCarFactory();
+            var player = new AudioPlayer(new Standby());
 
-            Client c = new Client(factory);
+            while (true)
+            {
+                Console.WriteLine("Current state: " + player.CurrentState.ToString());
+                Console.WriteLine("1 - Play");
+                Console.WriteLine("2 - Audio Source");
 
-            var car = c.CreateSkoda();
+                string i = Console.ReadLine();
+                switch (i)
+                {
+                    case "1": 
+                        player.PressPlay();
+                        break;
+                        case "2":
+                        player.PressAudio();
+                        break;
 
-            Console.WriteLine(car.Name + " " + car.ComesWithSpareTire);
+                }
+
+                Console.Clear();
+            }
 
         }
     }
