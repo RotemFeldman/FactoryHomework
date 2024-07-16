@@ -6,14 +6,29 @@ namespace FactoryHomework
     {
         static void Main(string[] args)
         {
-            AbstractCarFactory factory = new AbstractCarFactory();
+            int[,] mat = new int[3, 3];
 
-            Client c = new Client(factory);
+            FirstStep firstStep = new FirstStep(mat);
+            SecondStep secondStep = new SecondStep(mat);
+            ThirdStep thirdStep = new ThirdStep(mat);
+            FourthStep fourthStep = new FourthStep(mat);
 
-            var car = c.CreateSkoda();
+            firstStep.Next = secondStep;
+            secondStep.Next = thirdStep;
+            thirdStep.Next = fourthStep;
 
-            Console.WriteLine(car.Name + " " + car.ComesWithSpareTire);
+            firstStep.Handle();
 
+            for (int i = 0; i < mat.GetLength(0); i++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < mat.GetLength(1); j++)
+                    Console.Write(mat[i, j] + ",");
+            }
         }
+        
+
+        
+        
     }
 }
